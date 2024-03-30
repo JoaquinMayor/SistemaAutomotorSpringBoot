@@ -8,6 +8,7 @@ import com.turnos.vtv.turnosvtv.services.UserService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+//Validación que determina de si existe un usuario en la base de datos
 @Component
 public class IsExistDbUserValidation implements ConstraintValidator<IsExistDbUser,String>{
 

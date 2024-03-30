@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.Set;
 
 import com.turnos.vtv.turnosvtv.entities.User;
-
+//Acceso a la tabla e información de los usuarios
 public interface IUserRepository extends CrudRepository<User, String>{
 
     @Query("select u from User u left join fetch u.vehicles ")
@@ -21,7 +21,7 @@ public interface IUserRepository extends CrudRepository<User, String>{
     Optional<User> findByDni(String dni);
 
     @Query("select u from User u left join fetch u.vehicles where u.lastname = ?1")
-    Optional<User> findByLastname(String lastname);
+    Set<User> findByLastname(String lastname);
     
     boolean existsByDni(String dni);
 }   

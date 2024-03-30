@@ -26,7 +26,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 import static com.turnos.vtv.turnosvtv.security.filter.TokenJwtConfig.*;
-
+//Validación del token
 public class JwtAuthenticationFilter  extends UsernamePasswordAuthenticationFilter{
     
     private AuthenticationManager authenticationManager;

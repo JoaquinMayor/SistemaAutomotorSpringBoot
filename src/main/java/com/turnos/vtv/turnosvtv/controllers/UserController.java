@@ -36,11 +36,13 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    //Obtener toda la lista de usuarios para el admin
     @GetMapping
     public Set<User> list(){
         return service.allUsers();
     }
 
+    //Buscar un usuario por el email
     @GetMapping("/email/{email}")
     public ResponseEntity<?> findByEmail(@PathVariable String email){
 
@@ -51,16 +53,18 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    //Buscar usuarios por apellido
     @GetMapping("/lastname/{lastname}")
     public ResponseEntity<?> findByLastname(@PathVariable String lastname){
 
-        Optional<User> userOptional = service.findByLastname(lastname);
-        if(userOptional.isPresent()){
-            return ResponseEntity.ok(userOptional.orElseThrow());
+        Set<User> userSet = service.findByLastname(lastname);
+        if(!userSet.isEmpty()){
+            return ResponseEntity.ok(userSet);
         }
         return ResponseEntity.notFound().build();
     }
 
+    //Buscar usuario por DNI
     @GetMapping("/dni/{dni}")
     public ResponseEntity<?> findByDni(@PathVariable String dni){
 
@@ -71,6 +75,7 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    //Creación de usuario mediante el registro
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody User user, BindingResult result){
         
@@ -84,7 +89,8 @@ public class UserController {
         response.put("data", userNew);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
-
+    
+    //Actualización de los datos del usuario buscandolo por DNI
     @PutMapping("/dni/{dni}")
     public ResponseEntity<?> update(@PathVariable String dni, @Validated(UpdateValidationGroups.class) @RequestBody User user, BindingResult result){
         if(result.hasFieldErrors()){
@@ -103,6 +109,7 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    //Actualización del dato de la contraseña
     @GetMapping("/changePassword/{dni}/{password}")
     private ResponseEntity<?>changePassword(@PathVariable String dni, @PathVariable String password, BindingResult result){
         if(result.hasFieldErrors()){
@@ -118,7 +125,7 @@ public class UserController {
 
         return ResponseEntity.notFound().build();
     }
-
+    //Actualización del nombre del usuario por el DNI
     @GetMapping("/changeName/{dni}/{name}")
     private ResponseEntity<?>changeName(@PathVariable String dni, @PathVariable String name){
       
@@ -133,6 +140,7 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    //Actualización del apellido del usuario mediante el DNI
     @GetMapping("/changeLastname/{dni}/{lastname}")
     private ResponseEntity<?>changeLastname(@PathVariable String dni, @PathVariable String lastname){
        
@@ -148,7 +156,7 @@ public class UserController {
     }
 
     
-
+    //Actualización de la edad del usuario mediante el DNI
     @PatchMapping("/changeAge/{dni}/{age}")
     private ResponseEntity<?>changePassword(@PathVariable String dni, @PathVariable Integer age){
        
@@ -163,6 +171,7 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    //Actualización del email del usuario mediante el DNI
     @PatchMapping("/changeEmail/{dni}/{email}")
     private ResponseEntity<?>changeEmail(@PathVariable String dni, @PathVariable String email){
         
@@ -177,6 +186,7 @@ public class UserController {
         return ResponseEntity.notFound().build();
     }
 
+    //Cargarle un vehiculo al usuario
     @PutMapping("/add/vehicle/{dni}")
     public ResponseEntity<?> addVehicle(@PathVariable String dni, @Valid @RequestBody Vehicle vehicle, BindingResult result){
         if(result.hasFieldErrors()){
@@ -186,6 +196,7 @@ public class UserController {
         return service.addVehicle(dni, vehicle);
     }
 
+    //Cambio o transapaso de un vehiculo de un dueño a otro
     @PutMapping("/change/{patent}/{dniFirst}/{dniSecond}")
     public ResponseEntity<?> changeOwner(@PathVariable String patent, @PathVariable String dniFirst, @PathVariable String dniSecond){
         return service.changeCarOwner(patent, dniFirst, dniSecond);

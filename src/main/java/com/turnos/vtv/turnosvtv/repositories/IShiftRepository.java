@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Date;
 
-
+//Acceso a la tabla e información de los turnos
 public interface IShiftRepository extends CrudRepository<Shift,String>{
     
 @SuppressWarnings("null")

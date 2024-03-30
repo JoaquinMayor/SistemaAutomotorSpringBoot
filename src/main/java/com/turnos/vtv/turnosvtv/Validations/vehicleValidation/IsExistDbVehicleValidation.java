@@ -7,7 +7,7 @@ import com.turnos.vtv.turnosvtv.services.VehicleService;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-
+//Validación que determina si existe un vehiculo en la base de datos
 @Component
 public class IsExistDbVehicleValidation implements ConstraintValidator<IsExistDbVehicle,String>{
 

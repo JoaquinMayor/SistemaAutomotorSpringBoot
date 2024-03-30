@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
+//Clase rol para determinar los accesos a los distintos controladores del usuario
 @Entity
 @Table(name="roles")
 public class Role {

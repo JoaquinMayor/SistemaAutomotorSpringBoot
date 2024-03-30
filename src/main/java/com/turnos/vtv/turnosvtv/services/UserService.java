@@ -18,6 +18,7 @@ import com.turnos.vtv.turnosvtv.repositories.IRoleRepository;
 import com.turnos.vtv.turnosvtv.repositories.IUserRepository;
 import com.turnos.vtv.turnosvtv.repositories.IVehicleRepository;
 
+//Gestión de un usuario
 @Service
 public class UserService {
     
@@ -33,7 +34,7 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
+    //Creación de usuario
     @Transactional
     public User save(User user){
         Optional<Role> optionalRole = repositoryRole.findByName("ROLE_USER");
@@ -46,6 +47,7 @@ public class UserService {
         return repository.save(user);
     }
 
+    //Agregar un vehiculo a un usuario
     @Transactional
     public ResponseEntity<?> addVehicle(String dni, Vehicle vehicle){
         Optional<User> optionalUser = repository.findByDni(dni);
@@ -62,31 +64,37 @@ public class UserService {
         }
     }
 
+    //Buscar a todos los usuarios registrados
     @Transactional(readOnly = true)
     public Set<User> allUsers(){
         return repository.allUsers();
     }
 
+    //Buscar usuario por email
     @Transactional(readOnly = true)
     public Optional<User> findByEmail(String email){
         return repository.findByEmail(email);
     }
 
+    //Buscar usuario por DNI
     @Transactional(readOnly = true)
     public Optional<User> findByDni(String dni){
         return repository.findByDni(dni);
     }
 
+    //Buscar usuarios por apellido
     @Transactional(readOnly = true)
-    public Optional<User> findByLastname(String lastname){
+    public Set<User> findByLastname(String lastname){
         return repository.findByLastname(lastname);
     }
 
+    //Ver si existe el usuario por DNI
     @Transactional(readOnly = true)
     public boolean existByDni(String dni){
         return repository.existsByDni(dni);
     }
 
+    //Actualización de datos del usuario
     @Transactional
     public Optional<User> update(String dni, User user){
         Optional<User> userDB = repository.findByDni(dni);
@@ -102,7 +110,7 @@ public class UserService {
         }
         return userDB;
     }
-
+    //Cambiar contraseña del usuario
     @Transactional
     public Optional<User> changePassword(String dni, String password){
         Optional<User> optionalUser = repository.findByDni(dni);
@@ -114,6 +122,7 @@ public class UserService {
         return optionalUser;
     }
 
+    //Cambiar nombre del usuario
     @Transactional
     public Optional<User> changeName(String dni, String name){
         Optional<User> optionalUser = repository.findByDni(dni);
@@ -125,6 +134,7 @@ public class UserService {
         return optionalUser;
     }
 
+    //Cambiar apellido del usuario
     @Transactional
     public Optional<User> changeLastname(String dni, String lastName){
         Optional<User> optionalUser = repository.findByDni(dni);
@@ -136,6 +146,7 @@ public class UserService {
         return optionalUser;
     }
 
+    //Cambiar edad del usuario
     @Transactional
     public Optional<User> changeAge(String dni, Integer age){
         Optional<User> optionalUser = repository.findByDni(dni);
@@ -147,6 +158,7 @@ public class UserService {
         return optionalUser;
     }
 
+    //Cambiar email del usuario
     @Transactional
     public Optional<User> changeEmail(String dni, String email){
         Optional<User> optionalUser = repository.findByDni(dni);
@@ -159,7 +171,7 @@ public class UserService {
     }
 
     
-
+    //Cambiar un vehiculo de dueño
      @Transactional
     public ResponseEntity<?> changeCarOwner(String patent, String dniFirstOwner, String dniNewOwner){
         Optional<Vehicle> optionalVehicle = repositoryVehicle.findByPatent(patent);

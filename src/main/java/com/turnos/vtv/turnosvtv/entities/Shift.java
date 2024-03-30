@@ -19,6 +19,7 @@ import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+//Clase turno que tendra cada vehiculo para hacer algún tipo de tramite
 @Entity
 @Table(name = "shifts", uniqueConstraints = @UniqueConstraint(columnNames = "sku"))
 public class Shift {

@@ -31,11 +31,13 @@ public class VehicleController {
     @Autowired
     private VehicleService service;
 
+    //Lista todos los vehiculos existentes para el admin
     @GetMapping
     public List<Vehicle> list(){
         return service.findAll();
     }
 
+    //Busca un vehiculo por su patente
     @GetMapping("/{patent}")
     public ResponseEntity<?> findByPatent(@PathVariable String patent){
         Optional<Vehicle> optionalVehicle = service.finByPatent(patent);
@@ -46,6 +48,7 @@ public class VehicleController {
         return ResponseEntity.notFound().build();
     }
 
+    //Registro de un vehiculo en el sistema
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Vehicle vehicle, BindingResult result){
         if(result.hasFieldErrors()){
@@ -57,7 +60,7 @@ public class VehicleController {
     }
 
     
-
+    //Actualización de un vehiculo, buscado por su patente
     @PutMapping("/{patent}")
     public ResponseEntity<?> update(@PathVariable String patent, @Valid @RequestBody Vehicle vehicle, BindingResult result){
         if(result.hasFieldErrors()){
@@ -76,7 +79,7 @@ public class VehicleController {
         return ResponseEntity.notFound().build();
     }
 
-
+    //Validación de que los controladores no tienen errores
     private ResponseEntity<Map<String, String>> validation(BindingResult result){
         Map<String, String> errors = new HashMap<>();
         result.getFieldErrors().forEach(err ->{ //Da una lista de mensajesel getFieldErrors y lo recorremos para ir creando los mensajes

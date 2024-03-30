@@ -17,7 +17,7 @@ import com.turnos.vtv.turnosvtv.entities.User;
 import com.turnos.vtv.turnosvtv.repositories.IUserRepository;
 
 
-
+//Gestión del login y controlar la contraseña y el email
 @Service
 public class JpaUserDetailsService implements UserDetailsService{
     

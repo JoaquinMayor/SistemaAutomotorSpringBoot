@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.turnos.vtv.turnosvtv.entities.Vehicle;
 import com.turnos.vtv.turnosvtv.repositories.IVehicleRepository;
 
-
+//Gestión de Vehiculos
 @Service
 public class VehicleService {
     
@@ -19,27 +19,32 @@ public class VehicleService {
     private IVehicleRepository repository;
 
 
-   
+    //Guardar un vehiculo registrado
+    @SuppressWarnings("null")
     @Transactional
     public Vehicle saveVehicle(Vehicle vehicle){
         return repository.save(vehicle);
     }
 
+    //Buscar todos los vehiculos
     @Transactional(readOnly = true)
     public List<Vehicle> findAll(){
         return repository.findAll();
     }
 
+    //Buscar vehiculo por su patente
     @Transactional(readOnly = true)
     public Optional<Vehicle> finByPatent(String patent){
         return repository.findByPatent(patent);
     }
 
+    //Determinar si existe un vehiculo por su patente
     @Transactional(readOnly = true)
     public boolean existByPatent(String patent){
         return repository.existsByPatent(patent);
     }
 
+    //Actualizar los datos de un vehiculo
     @Transactional
     public Optional<Vehicle> update(String patent, Vehicle vehicle){
         Optional<Vehicle> vehicleDB = repository.findByPatent(patent);

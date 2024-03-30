@@ -8,6 +8,7 @@ import com.turnos.vtv.turnosvtv.services.ShiftService;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+//Validación de si existe el turno en la base de datos
 @Component
 public class IsExistDbShiftValidation implements ConstraintValidator<IsExistDbShift,String>{
 

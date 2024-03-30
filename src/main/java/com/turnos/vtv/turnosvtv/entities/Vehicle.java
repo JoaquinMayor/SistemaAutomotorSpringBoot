@@ -18,6 +18,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+//Clase vehiculos que cada uno va a gestionar sus propios turnos
 @Entity
 @Table(name = "vehicles", uniqueConstraints = @UniqueConstraint(columnNames = "patent"))
 public class Vehicle {

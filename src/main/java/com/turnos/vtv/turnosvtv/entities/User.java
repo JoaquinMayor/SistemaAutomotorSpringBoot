@@ -22,6 +22,7 @@ import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+//Clase usuario que va a existir un admin y los usuarios que van a gestionar sus vehiculos
 @Entity
 @Validated(UpdateValidationGroups.class)
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "dni"), @UniqueConstraint(columnNames = "email")})

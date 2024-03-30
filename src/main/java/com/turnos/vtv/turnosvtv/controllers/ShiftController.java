@@ -35,16 +35,19 @@ public class ShiftController {
     @Autowired
     private ShiftService service;
 
+    //Retorno de todos los turnos para control del admin
     @GetMapping
     public List<Shift> findaAll(){
         return service.findAll();
     }
 
+    //Obtener un turno para el admin mediante la fecha y hacer control
     @GetMapping("/myObject")
     public List<Shift> listByDate(@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm") Date date) throws ParseException{ //http://localhost:8080/api/shift/myObject?date=2022-02-01T00:00
             return service.findByDate(date);
     }
 
+    //Obtener lista de turnos en base a la patente del vehiculo
    @GetMapping("/{patent}")
     public ResponseEntity<?> findByPatent(@PathVariable String patent){
 
@@ -56,6 +59,7 @@ public class ShiftController {
         return ResponseEntity.notFound().build();
     }
 
+    //Creación de un turno, cuando lo hace el admin o el user
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody Shift shift, BindingResult result){
         if(result.hasFieldErrors()){
@@ -66,6 +70,7 @@ public class ShiftController {
         return ResponseEntity.status(HttpStatus.CREATED).body(newShift);
     }
 
+    //Eliminación para cuando se cancela o vence un turno
     @DeleteMapping("/delete/{patent}")
     public ResponseEntity<?> delete(@PathVariable String patent){
         
@@ -77,7 +82,7 @@ public class ShiftController {
         }
     }
 
-
+    //Validación de las funciones de que se encuentran bien
     private ResponseEntity<Map<String, String>> validation(BindingResult result){
         Map<String, String> errors = new HashMap<>();
         result.getFieldErrors().forEach(err ->{ //Da una lista de mensajesel getFieldErrors y lo recorremos para ir creando los mensajes

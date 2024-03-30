@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.turnos.vtv.turnosvtv.entities.Vehicle;
-
+//Acceso a la tabla e información de los vehiculos
 public interface IVehicleRepository extends CrudRepository<Vehicle,String>{
 
     

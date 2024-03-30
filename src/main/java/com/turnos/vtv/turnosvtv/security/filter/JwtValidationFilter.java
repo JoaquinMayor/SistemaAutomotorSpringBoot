@@ -25,6 +25,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import static com.turnos.vtv.turnosvtv.security.filter.TokenJwtConfig.*;
 
+//Cración del token según el tipo de acceso
 public class JwtValidationFilter extends BasicAuthenticationFilter{
     
     public JwtValidationFilter(AuthenticationManager authenticationManager) {
